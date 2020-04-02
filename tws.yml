@@ -65,3 +65,27 @@
         mode: u=r,og=---
       when: my_passwd.stat.exists == false
 
+
+    - name: Check file ibgateway (11/10)
+      stat:
+        path: /root/.vnc/ibgateway-stable-standalone-linux-x64.sh
+      register: my_ibgateway
+
+    - name: Copy ibgateway file (12/10)
+      copy:
+        src: /var/jenkins_home/ansible/ibgateway-stable-standalone-linux-x64.sh
+        dest: /root/.vnc/ibgateway-stable-standalone-linux-x64.sh
+        mode: u=rx,og=---
+      when: my_ibgateway.stat.exists == false
+
+    - name: Check file tws (13/10)
+      stat:
+        path: /root/.vnc/tws-latest-linux-x64.sh
+      register: my_tws
+
+    - name: Copy tws file (14/10)
+      copy:
+        src: /var/jenkins_home/ansible/tws-latest-linux-x64.sh
+        dest: /root/.vnc/tws-latest-linux-x64.sh
+        mode: u=rx,og=---
+      when: my_tws.stat.exists == false
