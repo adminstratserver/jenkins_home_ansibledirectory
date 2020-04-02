@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+
+  # run:
+  # $ export DO_API_TOKEN=your-token
+  # then run this playbook to create droplet
+  tasks:
+    - digital_ocean_droplet:
+        unique_name: yes # "yes" makes it idempotent
+        region: ams3 # slug of the region you would like your server to be created in.
+        #image: ubuntu-18-10-x64
+        image: ubuntu-16-04-x64
+        wait: yes
+        name: "tws004" # name of the droplet
+        size_id: s-1vcpu-1gb # slug of the size you would like the droplet created with.
+        state: present
+        oauth_token: 4d00b6d30e45999197689883042a5a8c6547aaae767c9b21db5430008470d9bb
+        ssh_keys: ['b7:eb:df:e7:9c:0c:45:b6:0a:8e:4e:cf:5f:df:e7:01']
+        #ssh_keys: ['a7:9f:76:ac:23:14:a6:b9:ec:01:68:57:c3:50:a4:1a']
+      register: created_droplet
+
+    

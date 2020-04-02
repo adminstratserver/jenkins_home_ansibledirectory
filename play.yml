@@ -1,0 +1,6 @@
+---
+- hosts: test2
+  tasks:
+
+    - shell: echo 'Hello from jenkins-ansible (DigitalOcean) to remotehost(Linode)' >> /tmp/file-from-ansible
+

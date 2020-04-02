@@ -1,0 +1,20 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  #vars_files:
+  #    - ./group_vars/example_group/vars
+  tasks:
+  - name: Create a new Linode.
+    linode_v4:
+        label: "tws002"
+        access_token: "d3f56d2b0d9d581637c916d2a7a01d73d1df69060a7e8647362d13c427850241"
+        type: g6-nanode-1
+        region: us-east
+        image: linode/debian9
+        root_pass: "dfhdnefi023472nA"
+        authorized_keys: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNSZmBvvPH77jBDxkhiZCI3OfElR+frOjMKsLRbWuJwJpJqjJmQR9umimSlqOYuO2V9k5txyvMlmnG000eqCL2MFYshm5OjC33Yfnz4/UnCAI8cjQs3gcqmoyBaJlyQly8U3T5wgV4BC7k1dHBX0+7iXr8YgrPT6xbpMsUBQ4ozMXoYinQhUP+Bt2MmKcuGAEOJH3TeE9WQr3/GmcULtZONHtIS6jvrMqp7O4ycRRLycxSTmYPtnIE1PMKd5HRWvNIXEMkZkHjm/OH08sQ5aMo54a/yYrNBi7BiT7EMGWCSSXFvtVl6xyGObMMZlTHy7SF8fgANiLlXUiAEHzppewV root@jenkins-ansible"
+        group: example_group
+        tags: example_group
+        state: present
+    register: my_linode

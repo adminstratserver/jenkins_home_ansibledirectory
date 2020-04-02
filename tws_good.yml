@@ -1,0 +1,58 @@
+---
+- hosts: tws
+  tasks:
+
+    - name: Update and upgrade apt packages (1/10)
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+
+    - name: Install xfce4 (2/10)
+      become: true
+      apt:
+        name: xfce4
+        state: latest
+        update_cache: yes
+
+    - name: Install xfce4-goodies (3/10)
+      become: true
+      apt:
+        name: xfce4-goodies
+        state: latest
+        update_cache: yes
+
+    - name: Install tightvncserver (4/10)
+      become: true
+      apt:
+        name: tightvncserver
+        state: latest
+        update_cache: yes
+
+    - name: Check directory. (5/10)
+      stat:
+        path: /root/.vnc
+      register: my_folder
+
+    - name: Create a .vnc directory (6/10)
+      file:
+        path: /root/.vnc
+        state: directory
+        mode: 0755
+      when: my_folder.stat.exists == false
+
+    #- name: Copy xstartup file (5/10)
+    #  command: cp /var/jenkins_home/ansible/xstartup  ~/.vnc/xstartup
+
+    - name: Copy xstartup file (7/10)
+      copy:
+        src: /var/jenkins_home/ansible/xstartup
+        dest: /root/.vnc/xstartup
+        mode: u=r,og=---
+
+    - name: Copy xstartup file (8/10)
+      copy:
+        src: /var/jenkins_home/ansible/passwd
+        dest: /root/.vnc/passwd
+        mode: u=r,og=---
+

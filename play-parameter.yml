@@ -1,0 +1,7 @@
+---
+- hosts: test2
+  tasks:
+
+    - debug:
+        msg: "{{ ANSIBLE_MSG }}"
+    - shell: echo "Hello from jenkins-ansible (DigitalOcean) date - $(date) MESSAGE - {{ ANSIBLE_MSG }}" >> /tmp/file-from-ansible
